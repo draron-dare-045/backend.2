@@ -5,9 +5,13 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Enable CORS (important for frontend)
+const cors = require("cors");
+app.use(cors());
+
 app.get("/api/news", async (req, res) => {
     const query = req.query.q || "aviation"; // Default to "aviation"
-    const API_KEY = process.env.NEWS_API_KEY;
+    const API_KEY = process.env.NEWS_API_KEY;   
     const API_URL = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&apiKey=${API_KEY}`;
 
     try {
